@@ -147,3 +147,65 @@ fileInput.addEventListener("change", async (e) => {
   }
 });
 
+// replace existing DOM queries and handlers with full-screen speak flow
+const speakBtn = document.getElementById("speakBtn");
+const visual = document.getElementById("visual");
+const status = document.getElementById("status");
+const chatOverlay = document.getElementById("chatOverlay");
+
+async function setStatus(txt){ status.textContent = txt; }
+
+async function runFlow(promptText){
+  try{
+    setStatus("Generating image…");
+    const imgRes = await websim.imageGen({ prompt: promptText, aspect_ratio: "3:4" });
+    visual.style.backgroundImage = `url(${imgRes.url})`;
+
+    setStatus("Asking AI for narration…");
+    const completion = await websim.chat.completions.create({
+      messages: [
+        { role: "system", content: "You are a concise demo narrator describing Websim AI capabilities in an engaging voice." },
+        { role: "user", content: promptText }
+      ]
+    });
+
+    chatOverlay.textContent = completion.content;
+    setStatus("Generating speech… (10s)");
+    const tts = await websim.textToSpeech({ text: completion.content, voice: "en-male" });
+
+    // play audio
+    const audio = new Audio(tts.url);
+    audio.play().catch(()=>{});
+    setStatus("Playing clip — tap to speak again");
+  }catch(err){
+    setStatus("Error: " + String(err));
+  }
+}
+
+// Speech recognition (mobile-first, fallback to text prompt)
+function startRecognition(){
+  if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+    const text = prompt("Speech not supported — type your prompt:");
+    if (text) runFlow(text);
+    return;
+  }
+  const Rec = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const r = new Rec();
+  r.lang = 'en-US';
+  r.interimResults = false;
+  r.maxAlternatives = 1;
+  setStatus("Listening…");
+  r.start();
+  r.onresult = (ev) => {
+    const spoken = ev.results[0][0].transcript;
+    setStatus("Heard: " + spoken);
+    runFlow(spoken);
+  };
+  r.onerror = (e) => { setStatus("Recognition error"); };
+  r.onend = ()=> { /* do nothing */ };
+}
+
+speakBtn.addEventListener("click", () => {
+  setStatus("Preparing microphone…");
+  startRecognition();
+});
