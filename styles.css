@@ -1,0 +1,120 @@
+:root{
+  --bg: #fff;
+  --fg: #111;
+  --muted: #666;
+  --accent: #0a66ff;
+  font-family: "Cal Sans", "Noto Sans", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*{box-sizing:border-box}
+html,body,#app{height:100%}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--fg);
+  padding:18px;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
+.app{
+  width:100%;
+  max-width:920px;
+}
+
+header h1{
+  margin:0 0 6px;
+  font-size:20px;
+  letter-spacing:-0.01em;
+}
+.lede{
+  margin:0 0 16px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.controls{
+  background:#fff;
+  border:1px solid #eee;
+  padding:12px;
+  border-radius:10px;
+  margin-bottom:12px;
+}
+.controls label{font-size:13px;color:var(--muted)}
+#prompt{
+  width:100%;
+  margin:8px 0 12px;
+  font-size:15px;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #e6e6e6;
+  resize:vertical;
+}
+
+.buttons{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+button, .upload{
+  background:var(--accent);
+  color:#fff;
+  border:0;
+  padding:10px 12px;
+  border-radius:8px;
+  font-weight:600;
+  font-size:14px;
+  cursor:pointer;
+}
+.upload{display:inline-flex;align-items:center;gap:8px}
+.upload input{display:none}
+
+button[disabled]{opacity:.5;cursor:not-allowed}
+
+.output{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:12px;
+  margin-top:12px;
+}
+
+.card{
+  border:1px solid #f0f0f0;
+  padding:12px;
+  border-radius:10px;
+  min-height:110px;
+  background:#fff;
+}
+.card h3{margin:0 0 8px;font-size:13px}
+
+.placeholder{
+  color:var(--muted);
+  font-size:14px;
+  min-height:64px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:8px;
+}
+
+img.generated{
+  max-width:100%;
+  height:auto;
+  border-radius:8px;
+  display:block;
+}
+
+audio {width:100%}
+
+footer{margin-top:12px;color:var(--muted);font-size:12px}
+@media (max-width:520px){
+  body{padding:12px}
+  header h1{font-size:18px}
+}
+

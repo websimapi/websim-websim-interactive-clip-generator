@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Websim Demo — Interactive Clip Generator</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script>
+    // Simple importmap stub for potential libs (not required but kept for future)
+    window.importmap = {};
+  </script>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <h1>Websim Interactive Clip Generator</h1>
+      <p class="lede">Explore Websim AI features: Text-to-Speech, Image Gen, Chat, and Upload. Mobile friendly.</p>
+    </header>
+
+    <section class="controls">
+      <label for="prompt">Clip prompt</label>
+      <textarea id="prompt" placeholder="Describe the short clip or voice you'd like..." rows="3">A friendly narrator explains what Websim can do in a warm tone.</textarea>
+
+      <div class="buttons">
+        <button id="ttsBtn">Generate & Play TTS</button>
+        <button id="imageBtn">Generate Image</button>
+        <button id="chatBtn">Ask the AI (Chat)</button>
+        <label class="upload">
+          <input id="fileInput" type="file" accept="image/*,video/*" />
+          Upload & Get URL
+        </label>
+      </div>
+    </section>
+
+    <section class="output" aria-live="polite">
+      <div class="card">
+        <h3>Audio</h3>
+        <div id="audioArea" class="placeholder">No audio yet</div>
+      </div>
+
+      <div class="card">
+        <h3>Generated Image</h3>
+        <div id="imageArea" class="placeholder">No image yet</div>
+      </div>
+
+      <div class="card">
+        <h3>Chat</h3>
+        <div id="chatArea" class="placeholder">No chat yet</div>
+      </div>
+
+      <div class="card">
+        <h3>Upload Result</h3>
+        <div id="uploadArea" class="placeholder">No upload</div>
+      </div>
+    </section>
+
+    <footer>
+      <small>Built for demo. Uses global "websim" APIs (imageGen, textToSpeech, chat.completions, upload).</small>
+    </footer>
+  </main>
+
+  <script type="module" src="main.js"></script>
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/v8c78df7c7c0f484497ecbca7046644da1771523124516" integrity="sha512-8DS7rgIrAmghBFwoOTujcf6D9rXvH8xm8JQ1Ja01h9QX8EzXldiszufYa4IFfKdLUKTTrnSFXLDkUEOTrZQ8Qg==" data-cf-beacon='{"version":"2024.11.0","token":"4c6229722a6346bc8eb5cb0e5eae5d41","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>
+
