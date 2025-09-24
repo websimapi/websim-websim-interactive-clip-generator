@@ -1,16 +1,17 @@
 // Main interaction logic for the Websim demo
 // Mobile-first, simple, uses global `websim` object (provided by the environment)
 
-const promptEl = document.getElementById("prompt");
+// Replace early DOM lookups with safe queries and fallbacks
+const promptEl = document.getElementById("prompt") || { value: "" };
 const ttsBtn = document.getElementById("ttsBtn");
 const imageBtn = document.getElementById("imageBtn");
 const chatBtn = document.getElementById("chatBtn");
 const fileInput = document.getElementById("fileInput");
 
-const audioArea = document.getElementById("audioArea");
-const imageArea = document.getElementById("imageArea");
-const chatArea = document.getElementById("chatArea");
-const uploadArea = document.getElementById("uploadArea");
+const audioArea = document.getElementById("audioArea") || document.createElement("div");
+const imageArea = document.getElementById("imageArea") || document.createElement("div");
+const chatArea = document.getElementById("chatArea") || document.createElement("div");
+const uploadArea = document.getElementById("uploadArea") || document.createElement("div");
 
 function setLoading(el, msg = "Working…") {
   el.innerHTML = `<em style="color:#999">${msg}</em>`;
